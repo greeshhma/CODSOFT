@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <style>
+         body{background-color:bisque}
+    </style>
+
+</head>
+<body>
+    <div style = "margin-top:25px;" class = "ui container">
+    <h1 class = "ui center aligned header">
+         To-Do List
+          <span style="display: inline-block; font-size: 24px; color: #000000; 
+          background:bisque ; border-radius: 6px; padding: 10px 20px;">📝
+          </span>
+     </h1>
+    <form action="/add" method ="post">
+        <div>
+            <h3 style = "margin-top:50px;" class = "ui center aligned header">
+            <input type="text" name="title" placeholder="Enter a new task">
+            <button class = "ui violet button" type="submit">Add</button>
+            </h3>
+        </div>
+    </form>
+
+    {% for todo in todo_list %}
+     <div class = "ui segment">
+      <p class = "ui big header"> {{ todo.id}} | {{ todo.title}} </p>
+
+
+
+      {% if todo.complete == False %}
+         <span class = "ui gray label">Not Complete</span>
+      {% else %}
+         <span class = "ui green label">Completed</span>
+      {% endif %}
+
+      <a class = "ui violet button" href="/update/{{ todo.id}}">Update</a>
+      <a class = "ui red button" href="/delete/{{ todo.id}}">Delete</a>
+          
+     </div>
+
+
+    {% endfor %}
+</div>
+
+</body>
+</html>
